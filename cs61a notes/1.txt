@@ -1,0 +1,34 @@
+CS61A Notes
+
+Lecture 1 set
+
+Expressions describes a computation and evaluates to a value
+Function call notation
+
+In call expressions you don't need to worry about the order
+call expression: fn(param1, param2) 
+terminology: operator(operand, operand)
+
+Call expressions are evaluated in the same way, using evaluation procedures.
+
+Evaluate the operator, then the operand subexpressions.
+Apply the function that is the value of the operator to the arguments that are the values of the operand subexpressions
+
+In python assignment statements, on the RHS of the assignment operator (=), the Python interpreter works out the values of expressions from left to right
+
+variable_1, variable_2 = first_statement_evaluated, second_statement_evaluated, third_statement_evaluated 
+
+Once the statements on the RHS have been evaluated, then the values are bound. Binding happens after statement evaluation.
+
+----
+Assignment binds names to values
+Function definition binds names to *expressions*
+
+----
+All expressions are evaluated in the context of an environment.
+
+An environment is a sequence of frames
+A frame is a binding between names and values
+A name evaluates to the value that binds the name in the earliest environment (when that name is mentioned)
+
+Local frames occur earlier than the global frame
