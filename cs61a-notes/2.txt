@@ -1,0 +1,11 @@
+Lecture 2 Notes
+
+Difference between printing and evaluating expressions. 
+E.g. printing a string literal returns string without quotation marks but evaluating it returns string with quotes.
+
+None - special value that indicates nothing returned
+No return values = return None
+None isn't usually displayed by the interpreter
+
+Pure functions - only return values
+Non-pure functions - have side effects 

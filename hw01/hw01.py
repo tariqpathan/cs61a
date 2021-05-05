@@ -38,7 +38,7 @@ def two_of_three(x, y, z):
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(two_of_three)).body[0].body]
     ['Expr', 'Return']
     """
-    return min(min(x, y), min(y, z), min(x, z)) ** 2 + max(min(x, y), min(y, z), min(x, z)) ** 2
+    return min(x, y, z) ** 2 + max(min(x, y), min(y, z), min(x, z)) ** 2
 
 def largest_factor(x):
     """Return the largest factor of x that is smaller than x.
@@ -50,7 +50,12 @@ def largest_factor(x):
     >>> largest_factor(13) # factor is 1 since 13 is prime
     1
     """
-    "*** YOUR CODE HERE ***"
+    i = x - 1
+    while i > 1:
+        if x % i == 0:
+            return i
+        i -= 1
+    return 1 # this isn't required since x % 1 will also return 1 (when i = 1)
 
 def if_function(condition, true_result, false_result):
     """Return true_result if condition is a true value, and
@@ -94,13 +99,12 @@ def with_if_function():
     return if_function(c(), t(), f())
 
 def c():
-    "*** YOUR CODE HERE ***"
-
+    pass
 def t():
-    "*** YOUR CODE HERE ***"
+    print(5)
 
 def f():
-    "*** YOUR CODE HERE ***"
+    print(6)
 
 def hailstone(x):
     """Print the hailstone sequence starting at x and return its
@@ -117,4 +121,14 @@ def hailstone(x):
     >>> a
     7
     """
-    "*** YOUR CODE HERE ***"
+    i = 1
+    print(x)
+    while x > 1:
+        if x % 2 == 0:
+            x = x // 2
+        else:
+            x = 3 * x + 1
+        print(x)
+        i += 1
+    return i
+    

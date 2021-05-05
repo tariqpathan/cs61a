@@ -1,0 +1,40 @@
+Lecture 4 Notes
+
+When designing an iterative function, think about what you need to keep track of.
+pred = predecessor
+
+----
+Discussion Q:
+
+def fib(n):            < new change > 
+    pred, curr = 0, 1  pred, curr = 1, 0
+    k = 1              k = 0
+    while k < n:
+        pred, curr = curr, pred + curr
+    return curr
+
+Previously pred = 0, curr = 1, k = 1
+Now pred = 1, curr = 0, k = 0
+
+Is the alternative definition of fib the same or different from the original fib?
+
+My answer: Implementing in python, you get the same values for n. 
+The newer version also calculates the 0th term for the fibonacci sequence, which the old version did not do.
+
+----
+
+Designing Functions
+A function's domain is the set of all inputs it may take as arguments
+A function's range is the set of all outputs it may return
+Pure function's behaviour is the relationship between the input and output
+
+1 function = 1 job
+Don't repeat yourself
+Define functions generally - solve the problem/job in one way, instead of different ways
+
+Higher-Order Functions
+Functions that take on other functions as arguments
+Functions are first-class values: functions themselves can be treated as values
+This also means functions can be passed as args or returned as values
+HOFs do this.
+HOFs remove repetition and allow generalisations, and separate concerns
