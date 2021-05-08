@@ -42,7 +42,16 @@ def falling(n, k):
     >>> falling(4, 0)
     1
     """
-    "*** YOUR CODE HERE ***"
+    num = 1
+    # alternate for loop
+    # for i in range(n, n - k, -1):
+    #     num = num * i
+    i = 0
+    while i < k:
+        num = num * n
+        n -= 1
+        i += 1
+    return num
 
 def double_eights(n):
     """Return true if n has two eights in a row.
@@ -60,3 +69,14 @@ def double_eights(n):
     False
     """
     "*** YOUR CODE HERE ***"
+    """
+    check if last two digits are 88 using n % 100 == 88
+    else floor divide by 10
+    stop when floor division < 10 and return false
+    """
+
+    while n > 87: # any lower and no 88's can exist
+        if n % 100 == 88:
+            return True
+        n = n // 10
+    return False
