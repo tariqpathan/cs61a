@@ -120,13 +120,38 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     say:        The commentary function to call at the end of the first turn.
     feral_hogs: A boolean indicating whether the feral hogs rule should be active.
     """
+    prev_score0, prev_score1 = 0, 0
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
+
+    while score0 < goal and score1 < goal:
+        # print("DEBUG: new loop")
+        if not who:
+            strategy, score, opponent, prev_score = strategy0, score0, score1, prev_score0
+        else:
+            strategy, score, opponent, prev_score = strategy1, score1, score0, prev_score1
+        round_score = take_turn(strategy(score, opponent), opponent, dice)
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
-    "*** YOUR CODE HERE ***"
+        # print("abs", (strategy(score, opponent)), prev_score)
+        # print(f"who: {who}, round: {round_score}, prev: {prev_score}, score: {score}")
+        if abs(strategy(score, opponent) - prev_score) == 2:
+            score += 3
+        score += round_score
+        prev_score = round_score
+
+        if not who:
+            score0 = score
+            prev_score0 = prev_score
+        else:
+            score1 = score
+            prev_score1 = prev_score
+        if is_swap(score0, score1):
+            score0, score1 = score1, score0
+        # print(f"s0: {score0}, s1: {score1}")
+        who = other(who)
+        
     # END PROBLEM 6
     return score0, score1
 
