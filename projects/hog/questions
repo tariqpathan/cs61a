@@ -1,0 +1,39 @@
+Commentary - Phase 2
+
+What does the following phrase mean: "Note that say_scores [a function] returns itself, meaning that the same commentary function will be called each turn"
+
+Why was it designed that the same commentary function is called each turn?
+
+====
+Explanation of announce_lead_changes
+def announce_lead_changes(prev_leader=None):
+    """Return a commentary function that announces lead changes.
+
+    >>> f0 = announce_lead_changes()
+    >>> f1 = f0(5, 0)
+    Player 0 takes the lead by 5
+    >>> f2 = f1(5, 12)
+    Player 1 takes the lead by 7
+    >>> f3 = f2(8, 12)
+    >>> f4 = f3(8, 13)
+    >>> f5 = f4(15, 13)
+    Player 0 takes the lead by 2
+    """
+    def say(score0, score1):
+        if score0 > score1:
+            leader = 0
+        elif score1 > score0:
+            leader = 1
+        else:
+            leader = None
+        if leader != None and leader != prev_leader:
+            print('Player', leader, 'takes the lead by', abs(score0 - score1))
+        return announce_lead_changes(leader)
+    return say
+
+
+1. When announce_lead_changes is called, it returns say (a function).
+2. The result is then called with a score value.
+3. I.e. announce_lead_changes()(score1, score2)
+4. The say function sets the leader and returns a *different* annonce_lead_changes function with the prev_leader argument equal to the value of leader. Before the prev_leader was none.
+5. The say function is then returned with the announce_lead_changes function that is called with that prev_leader argument.

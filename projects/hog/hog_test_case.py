@@ -18,7 +18,16 @@ def strat1(s0, s1):
 
 # print(s0, s1)
 
-s0, s1 = hog.play(always(2), always(1), score0=17, score1=6, goal=21, 
-    dice=hog.make_test_dice(1, 2))
+# s0, s1 = hog.play(always(2), always(1), score0=17, score1=6, goal=21, 
+#     dice=hog.make_test_dice(1, 2))
+
+# print(s0, s1)
+
+def echo(s0, s1):
+    print("echo called")
+    print(s0, s1)
+    return echo
+
+s0, s1 = hog.play(always(1), always(1), dice=hog.make_test_dice(3), goal=5, say=echo)
 
 print(s0, s1)

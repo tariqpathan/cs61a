@@ -136,7 +136,7 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     # BEGIN PROBLEM 6
         # print("abs", (strategy(score, opponent)), prev_score)
         # print(f"who: {who}, round: {round_score}, prev: {prev_score}, score: {score}")
-        if abs(strategy(score, opponent) - prev_score) == 2:
+        if feral_hogs and abs(strategy(score, opponent) - prev_score) == 2:
             score += 3
         score += round_score
         prev_score = round_score
@@ -150,6 +150,7 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
         if is_swap(score0, score1):
             score0, score1 = score1, score0
         # print(f"s0: {score0}, s1: {score1}")
+        say(score, opponent)
         who = other(who)
         
     # END PROBLEM 6
@@ -164,7 +165,7 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
 def say_scores(score0, score1):
     """A commentary function that announces the score for each player."""
     print("Player 0 now has", score0, "and Player 1 now has", score1)
-    return say_scores
+    # return say_scores
 
 def announce_lead_changes(prev_leader=None):
     """Return a commentary function that announces lead changes.
