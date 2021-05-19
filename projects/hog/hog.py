@@ -147,10 +147,13 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
         else:
             score1 = score
             prev_score1 = prev_score
+        
         if is_swap(score0, score1):
             score0, score1 = score1, score0
         # print(f"s0: {score0}, s1: {score1}")
-        say(score, opponent)
+        # print(score, opponent)
+        # print(say(score0, score1))
+        say = say(score0, score1)
         who = other(who)
         
     # END PROBLEM 6

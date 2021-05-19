@@ -37,3 +37,18 @@ def announce_lead_changes(prev_leader=None):
 3. I.e. announce_lead_changes()(score1, score2)
 4. The say function sets the leader and returns a *different* annonce_lead_changes function with the prev_leader argument equal to the value of leader. Before the prev_leader was none.
 5. The say function is then returned with the announce_lead_changes function that is called with that prev_leader argument.
+
+====
+
+Say function in phase 2
+
+def echo_0(s0, s1):
+    print('*', s0)
+    return echo_0
+
+def echo_1(s0, s1):
+    print('**', s1)
+    return echo_1
+
+when these functions are returned, why are they returned without any arguments?
+A: because they're not being called/invoked immediately. When we want to call them, we will call them with the appropriate args.

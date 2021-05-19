@@ -28,6 +28,38 @@ def echo(s0, s1):
     print(s0, s1)
     return echo
 
-s0, s1 = hog.play(always(1), always(1), dice=hog.make_test_dice(3), goal=5, say=echo)
+def count(n):
+    # print(n)
+    def say(s0, s1):
+        # print(s0, s1)
+        print(n)
+        # print("DEBUG: returning count(n+1)", n + 1)
+        return count(n + 1)
+    return say
 
-print(s0, s1)
+def echo2(s0, s1):
+    print(s0, s1)
+    return echo2
+
+def total(s0, s1):
+    print("total", s0 + s1)
+    return echo3
+
+def echo3(s0, s1):
+    print("echo3", s0, s1)
+    return total
+
+strat0 = always(1) #lambda score, opponent: 1 - opponent // 10
+strat1 = always(1)
+
+# s0, s1 = hog.play(strat0, strat1, dice=hog.make_test_dice(2, 3), goal=15, say=echo3)
+
+def echo_0(s0, s1):
+    print('*', s0)
+    return echo_0
+
+def echo_1(s0, s1):
+    print('**', s1)
+    return echo_1
+
+s0, s1 = hog.play(strat0, strat1, dice=hog.make_test_dice(2), goal=3, say=hog.both(echo_0, echo_1))
