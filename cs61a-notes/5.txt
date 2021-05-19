@@ -11,4 +11,26 @@ def g(y):
 result = repeat(g, n)
 
 Video 3: Why isn't the g function called inside the repeat frame, but instead is within the global frame?
+Answer (my own): Because g was created in the global frame. The parent of a function is set to the current frame where that function is created.
+In this case, g was created in the global frame, so the parent of g is the global frame.
 
+Every user-defined function has a parent frame. With nested defs, the inner def will have the outer def as a parent.
+The parent of a function is the frame in which it was defined.
+Therefore, the parent of a frame is also the parent of the function called. 
+
+####
+Lambda Expressions
+Expressions that evaluate to functions - bind to a name a function that takes in some argument and returns a values
+
+value = lambda param: return_something_with_param(s) - no return / def keyword
+Lambdas are limited to single Expressions
+def statements have an intrinsic name, lambda functions do not.
+
+
+
+****
+Check conditions for some of the questions
+construct_check.py - required for test cases
+remove portion of test cases that uses that file
+hw2 onwards use newer version of construct_check.py
+replace spring 2020 with fall 2020 version
