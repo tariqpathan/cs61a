@@ -168,7 +168,7 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
 def say_scores(score0, score1):
     """A commentary function that announces the score for each player."""
     print("Player 0 now has", score0, "and Player 1 now has", score1)
-    # return say_scores
+    return say_scores
 
 def announce_lead_changes(prev_leader=None):
     """Return a commentary function that announces lead changes.
@@ -241,7 +241,22 @@ def announce_highest(who, prev_high=0, prev_score=0):
     """
     assert who == 0 or who == 1, 'The who argument should indicate a player.'
     # BEGIN PROBLEM 7
-    "*** YOUR CODE HERE ***"
+    
+    def say(score0, score1):
+        temp_high = prev_high
+        if not who:
+            score = score0
+        else:
+            score = score1
+        
+        difference = score - prev_score
+        if difference > temp_high:
+            print(f"{difference} point(s)! That's the biggest gain yet for Player {who}")
+            temp_high = difference
+        
+        return announce_highest(who, temp_high, score)
+    return say
+
     # END PROBLEM 7
 
 
@@ -280,9 +295,14 @@ def make_averaged(g, num_samples=1000):
     3.0
     """
     # BEGIN PROBLEM 8
-    "*** YOUR CODE HERE ***"
+    def average_and_return(*args):
+        total = i = 0
+        while i < num_samples:
+            total += g(*args)
+            i += 1
+        return total / num_samples
+    return average_and_return
     # END PROBLEM 8
-
 
 def max_scoring_num_rolls(dice=six_sided, num_samples=1000):
     """Return the number of dice (1 to 10) that gives the highest average turn
