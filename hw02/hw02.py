@@ -33,7 +33,11 @@ def product(n, f):
     >>> product(3, triple)    # 1*3 * 2*3 * 3*3
     162
     """
-    "*** YOUR CODE HERE ***"
+    total, i = f(1), 2
+    while i <= n:
+        total = total * f(i)
+        i = i + 1
+    return total
 
 def accumulate(combiner, base, n, f):
     """Return the result of combining the first n terms in a sequence and base.
@@ -57,7 +61,11 @@ def accumulate(combiner, base, n, f):
     >>> accumulate(lambda x, y: (x + y) % 17, 19, 20, square)
     16
     """
-    "*** YOUR CODE HERE ***"
+    total, i = base, 1
+    while i <= n:
+        total = combiner(total, f(i))
+        i = i + 1
+    return total
 
 def summation_using_accumulate(n, f):
     """Returns the sum of f(1) + ... + f(n). The implementation
@@ -67,13 +75,14 @@ def summation_using_accumulate(n, f):
     55
     >>> summation_using_accumulate(5, triple)
     45
-    >>> from construct_check import check
-    >>> # ban iteration and recursion
-    >>> check(HW_SOURCE_FILE, 'summation_using_accumulate',
-    ...       ['Recursion', 'For', 'While'])
-    True
     """
-    "*** YOUR CODE HERE ***"
+    # >>> from construct_check import check
+    # >>> # ban iteration and recursion
+    # >>> check(HW_SOURCE_FILE, 'summation_using_accumulate',
+    # ...       ['Recursion', 'For', 'While'])
+    # True
+    
+    return accumulate(add, 0, n, f)
 
 def product_using_accumulate(n, f):
     """An implementation of product using accumulate.
@@ -82,13 +91,14 @@ def product_using_accumulate(n, f):
     576
     >>> product_using_accumulate(6, triple)
     524880
-    >>> from construct_check import check
-    >>> # ban iteration and recursion
-    >>> check(HW_SOURCE_FILE, 'product_using_accumulate',
-    ...       ['Recursion', 'For', 'While'])
-    True
     """
-    "*** YOUR CODE HERE ***"
+    # >>> from construct_check import check
+    # >>> # ban iteration and recursion
+    # >>> check(HW_SOURCE_FILE, 'product_using_accumulate',
+    # ...       ['Recursion', 'For', 'While'])
+    # True
+    
+    return accumulate(mul, 1, n, f)
 
 def compose1(h, g):
     """Return a function f, such that f(x) = h(g(x))."""
@@ -111,8 +121,29 @@ def make_repeater(h, n):
     >>> make_repeater(square, 0)(5) # Yes, it makes sense to apply the function zero times! 
     5
     """
-    "*** YOUR CODE HERE ***"
+    def g(x):
+        if n == 0:
+            return x
+        return h(make_repeater(h, n - 1)(x))
+    return g
 
+def make_repeater_2(h, n):
+    """Return the function that computes the nth application of h, using a one-line statement.
+
+    >>> add_three = make_repeater(increment, 3)
+    >>> add_three(5)
+    8
+    >>> make_repeater(triple, 5)(1) # 3 * 3 * 3 * 3 * 3 * 1
+    243
+    >>> make_repeater(square, 2)(5) # square(square(5))
+    625
+    >>> make_repeater(square, 4)(5) # square(square(square(square(5))))
+    152587890625
+    >>> make_repeater(square, 0)(5) # Yes, it makes sense to apply the function zero times! 
+    5
+    """
+    
+    return compose1(h, make_repeater_2(h, n - 1))
 
 ##########################
 # Just for fun Questions #
